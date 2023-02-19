@@ -18,27 +18,27 @@
                     <table class="table table-bordered" width="100%" cellspasing="0">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>No</th>
                                 <th>Title</th>
                                 <th>Location</th>
-                                <th>Type</th>
                                 <th>Depature Date</th>
                                 <th>Type</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @php $count = 1 @endphp
                             @forelse ($items as $row)
                             <tr>
-                                <td>{{ $row->id }}</td>
+                                <td>{{$count++}}</td>
                                 <td>{{ $row->title }}</td>
                                 <td>{{ $row->location }}</td>
                                 <td>{{ $row->depature_date }}</td>
                                 <td>{{ $row->type }}</td>
                                 <td>
-                                    <a href="{{ route('travel-package.edit'. $row->id)  }}" class="btn btn-info">
+                                    <a href="{{ route('travel-package.edit', $row->id) }}" class="btn btn-info">
                                     <i class="fa fa-pencil-alt"></i></a>
-                                    <form action="{{ route('travel-package.destroy'. $row->id)  }}" method="POST" class="d-inline">
+                                    <form action="{{ route('travel-package.destroy', $row->id) }}" method="POST" class="d-inline">
                                     @csrf
                                         @method('delete')
                                         <button class="btn btn-danger">

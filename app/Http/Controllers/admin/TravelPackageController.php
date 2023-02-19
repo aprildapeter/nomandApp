@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\TravelPackage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use App\Http\Requests\Admin\TravelPackageRequest;
 
 class TravelPackageController extends Controller
 {
@@ -17,7 +19,7 @@ class TravelPackageController extends Controller
     {
         $items = TravelPackage::all();
 
-        return view('pages.admin.travel-package.index',[
+        return view('pages.admin.travel-package.index', [
             'items' => $items
         ]);
     }
@@ -38,9 +40,13 @@ class TravelPackageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TravelPackageRequest $request)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->title);
+
+        TravelPackage::create($data);
+        return redirect()->route('travel-package.index');
     }
 
     /**
@@ -62,7 +68,11 @@ class TravelPackageController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = TravelPackage::findOrfail($id);
+
+        return view('pages.admin.travel-package.edit', [
+            'item' => $item
+        ]);
     }
 
     /**
@@ -72,9 +82,14 @@ class TravelPackageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TravelPackageRequest $request, $id)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->title);
+
+        $item = TravelPackage::findOrfail($id);
+        $item->update($data);
+        return redirect()->route('travel-package.index');
     }
 
     /**
@@ -85,6 +100,9 @@ class TravelPackageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = TravelPackage::findOrFail($id);
+        $item->delete();
+        return redirect()->route('travel-package.index');
+
     }
 }
