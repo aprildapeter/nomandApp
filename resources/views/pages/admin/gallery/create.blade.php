@@ -27,7 +27,7 @@
                         <label for="title">Paket Travel</label>
                         <select name="travel_packages_id" required class="form-control">
                             <option value="">Silahkan Pilih</option>
-                            @foreach ($travel_package as $item)
+                            @foreach ($travel_packages as $item)
                                 <option value="{{ $item->id }}">{{ $item->title }}</option>
                             @endforeach
                         </select>
