@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\admin\dashboardController;
 use App\Http\Controllers\admin\GalleryController;
+use App\Http\Controllers\admin\TransactionController;
 use App\Http\Controllers\admin\TravelPackageController;
 use App\Http\Controllers\checkoutController;
 use App\Http\Controllers\detailController;
 use App\Http\Controllers\homeController;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -37,5 +39,6 @@ Route::middleware([
     Route::get('/dashboard',[dashboardController::class, 'index'])->name('dashboard');
     Route::resource('travel-package', TravelPackageController::class);
     Route::resource('gallery', GalleryController::class);
+    Route::resource('transaction', TransactionController::class);
 });
 // Auth::routes(['verify' => true]);
