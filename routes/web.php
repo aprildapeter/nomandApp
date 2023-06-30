@@ -26,9 +26,29 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::get('/', [homeController::class, 'index'])->name('home');
-Route::get('/detail', [detailController::class, 'index'])->name('detail');
-Route::get('/checkout', [checkoutController::class, 'index'])->name('checkout');
-Route::get('/checkout/success', [checkoutController::class, 'success'])->name('checkout-success');
+Route::get('/detail/{slug}', [detailController::class, 'index'])->name('detail');
+// Route::get('/checkout', [checkoutController::class, 'index'])->name('checkout');
+// Route::get('/checkout/success', [checkoutController::class, 'success'])->name('checkout-success');
+Route::post('/checkout/{id}', [checkoutController::class, 'process'])
+    ->name('checkout-process')
+    ->middleware(['auth','verified']);
+
+Route::get('/checkout/{id}', [checkoutController::class, 'index'])
+    ->name('checkout')
+    ->middleware(['auth','verified']);
+
+Route::post('/checkout/create/{detail_id}', [checkoutController::class, 'create'])
+    ->name('checkout-create')
+    ->middleware(['auth','verified']);
+
+Route::get('/checkout/remove/{detail_id}', [checkoutController::class, 'remove'])
+    ->name('checkout-remove')
+    ->middleware(['auth','verified']);
+
+Route::get('/checkout/confirm/{id}', [checkoutController::class, 'success'])
+    ->name('checkout-success')
+    ->middleware(['auth','verified']);
+
 
 Route::middleware([
     'auth:sanctum',
