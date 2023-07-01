@@ -26,12 +26,12 @@ class checkoutController extends Controller
 
         $transaction = Transaction::create([
             'travel_packages_id' => $id,
-            'users_id' => Auth::user()->id,
+            'user_id' => Auth::user()->id,
             'additional_visa' => 0,
             'transaction_total' => $travel_package->price,
             'transaction_status' => 'IN_CART'
         ]);
-
+        
         TransactionDetail::create([
             'transactions_id' => $transaction->id,
             'username' => Auth::user()->username,
@@ -39,7 +39,7 @@ class checkoutController extends Controller
             'is_visa' => false,
             'doe_passport' => Carbon::now()->addYears(5)
         ]);
-
+        
         return redirect()->route('checkout', $transaction->id);
     }
 

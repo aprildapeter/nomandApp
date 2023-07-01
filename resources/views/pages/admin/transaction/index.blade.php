@@ -31,8 +31,8 @@
                                 <td>{{$count++}}</td>
                                 <td>{{ $row->travel_package->title }}</td>
                                 <td>{{ $row->user->name }}</td>
-                                <td>{{ $row->additional_visa }}</td>
-                                <td>{{ $row->transaction_total }}</td>
+                                <td>${{ $row->additional_visa }}</td>
+                                <td>${{ $row->transaction_total }}</td>
                                 <td>{{ $row->transaction_status }}</td>
                                 <td>
                                     <a href="{{ route('transaction.show', $row->id) }}" class="btn btn-primary">
