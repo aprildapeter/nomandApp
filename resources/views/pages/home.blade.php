@@ -27,7 +27,7 @@
         <div class="container">
             <section class="section-stats row justify-content-center" id="stats">
                 <div class="col-3 col-md-2 stats-detail">
-                    <h2>10k</h2>
+                    <h2>15k</h2>
                     <p>Member</p>
                 </div>
                 <div class="col-3 col-md-2 stats-detail">
